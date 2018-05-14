@@ -1,0 +1,30 @@
+<% require 'open-uri'
+ require 'json'
+  url = "https://wagon-dictionary.herokuapp.com/#{@suggestion}"
+  word_serialized = open(url).read
+  word = JSON.parse(word_serialized)
+  @letters = params[:letters].split('')
+  @suggestion = params[:suggestion]
+  array = @suggestion.split("")
+%>
+<%= array %>
+<% if word["found"] == true %>
+   <% word_a = word["word"].split("") %>
+    <% word_a.each do |letter| %>
+    <% if array.include?(letter) %>
+      <%= "yes" %>
+    <% else %>
+      <%= "Doesn't work because wrong letters" %>
+    <% end %>
+
+  <% end %>
+    <% else %>
+      <%= "Doesn't work because not a word" %>
+  <% end %>
+
+
+<h1>Result</h1>
+<br>
+
+<%= link_to "Return", new_path %>
+

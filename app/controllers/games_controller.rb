@@ -4,5 +4,6 @@ class GamesController < ApplicationController
   end
 
   def score
+    @suggestion = params[:suggestion]
   end
 end
